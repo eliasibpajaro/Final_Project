@@ -1,0 +1,3965 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Predicción del espectro de respuesta a partir de datos in situ &#8212; Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Lolipop.png" class="logo__image only-light" alt="Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering - Home"/>
+    <img src="_static/Lolipop.png" class="logo__image only-dark pst-js-only" alt="Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Predicción del espectro de respuesta a partir de datos in situ</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDA.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDA.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Predicción del espectro de respuesta a partir de datos in situ</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-nga-west2">EDA NGA West2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relaciones-con-la-variable-de-respuesta">Relaciones con la variable de respuesta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-colombia">EDA Colombia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-database">Full database</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithm-transformation-to-rrup-and-rhypo-variables">Logarithm transformation to Rrup and Rhypo variables.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="prediccion-del-espectro-de-respuesta-a-partir-de-datos-in-situ">
+<h1>Predicción del espectro de respuesta a partir de datos in situ<a class="headerlink" href="#prediccion-del-espectro-de-respuesta-a-partir-de-datos-in-situ" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="eda-nga-west2">
+<h2>EDA NGA West2<a class="headerlink" href="#eda-nga-west2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;C:/Users/elias/OneDrive/Desktop/MachineLearning/FinalProjectDL/Final_Project/Updated_NGA_West2_Flatfile_RotD50EDITADO.xlsx&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Record Sequence Number</th>
+      <th>Hypocenter Latitude (deg)</th>
+      <th>Hypocenter Longitude (deg)</th>
+      <th>Station Latitude</th>
+      <th>Station Longitude</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Earthquake Name</th>
+      <th>Magnitude</th>
+      <th>Magnitude Type</th>
+      <th>EpiD (km)</th>
+      <th>...</th>
+      <th>T_0.5_RotD50</th>
+      <th>T_0.75_RotD50</th>
+      <th>T_1.0_RotD50</th>
+      <th>T_1.5_RotD50</th>
+      <th>T_2.0_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>46.61000</td>
+      <td>-111.96000</td>
+      <td>46.58000</td>
+      <td>-112.0300</td>
+      <td>6.000</td>
+      <td>Helena, Montana-01</td>
+      <td>6.0</td>
+      <td>Mw</td>
+      <td>6.31000</td>
+      <td>...</td>
+      <td>0.143020</td>
+      <td>0.092829</td>
+      <td>0.101136</td>
+      <td>0.059109</td>
+      <td>0.035895</td>
+      <td>0.015257</td>
+      <td>0.007987</td>
+      <td>0.004644</td>
+      <td>0.003037</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>46.62000</td>
+      <td>-111.97000</td>
+      <td>46.59000</td>
+      <td>-112.0400</td>
+      <td>6.000</td>
+      <td>Helena, Montana-02</td>
+      <td>6.0</td>
+      <td>U</td>
+      <td>6.31000</td>
+      <td>...</td>
+      <td>0.004500</td>
+      <td>0.002727</td>
+      <td>0.001501</td>
+      <td>0.001135</td>
+      <td>0.000681</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>40.40000</td>
+      <td>-125.10000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>Humbolt Bay</td>
+      <td>5.8</td>
+      <td>Mw</td>
+      <td>73.49000</td>
+      <td>...</td>
+      <td>0.082295</td>
+      <td>0.056946</td>
+      <td>0.035785</td>
+      <td>0.016157</td>
+      <td>0.009347</td>
+      <td>0.002960</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32.90000</td>
+      <td>-115.21700</td>
+      <td>32.79400</td>
+      <td>-115.5490</td>
+      <td>16.000</td>
+      <td>Imperial Valley-01</td>
+      <td>5.0</td>
+      <td>U</td>
+      <td>33.20000</td>
+      <td>...</td>
+      <td>0.021552</td>
+      <td>0.009689</td>
+      <td>0.006027</td>
+      <td>0.002115</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>40.30000</td>
+      <td>-124.80000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>Northwest Calif-01</td>
+      <td>5.5</td>
+      <td>Mw</td>
+      <td>54.88000</td>
+      <td>...</td>
+      <td>0.223093</td>
+      <td>0.091499</td>
+      <td>0.093659</td>
+      <td>0.026785</td>
+      <td>0.013654</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>21293</th>
+      <td>21536</td>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.58230</td>
+      <td>-122.4201</td>
+      <td>8.465</td>
+      <td>51177103</td>
+      <td>3.6</td>
+      <td>Mw</td>
+      <td>34.87796</td>
+      <td>...</td>
+      <td>0.001476</td>
+      <td>0.000493</td>
+      <td>0.000260</td>
+      <td>0.000114</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21294</th>
+      <td>21537</td>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.40370</td>
+      <td>-122.1760</td>
+      <td>8.465</td>
+      <td>51177103</td>
+      <td>3.6</td>
+      <td>Mw</td>
+      <td>50.96330</td>
+      <td>...</td>
+      <td>0.000350</td>
+      <td>0.000166</td>
+      <td>0.000093</td>
+      <td>0.000043</td>
+      <td>0.000016</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21295</th>
+      <td>21538</td>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.58640</td>
+      <td>-122.5022</td>
+      <td>8.465</td>
+      <td>51177103</td>
+      <td>3.6</td>
+      <td>Mw</td>
+      <td>38.41923</td>
+      <td>...</td>
+      <td>0.000883</td>
+      <td>0.000366</td>
+      <td>0.000123</td>
+      <td>0.000052</td>
+      <td>0.000032</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21296</th>
+      <td>21539</td>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.94910</td>
+      <td>-122.4085</td>
+      <td>8.465</td>
+      <td>51177103</td>
+      <td>3.6</td>
+      <td>Mw</td>
+      <td>18.09285</td>
+      <td>...</td>
+      <td>0.000810</td>
+      <td>0.000282</td>
+      <td>0.000159</td>
+      <td>0.000067</td>
+      <td>0.000032</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21297</th>
+      <td>21540</td>
+      <td>35.81700</td>
+      <td>-120.36500</td>
+      <td>35.21263</td>
+      <td>-120.8553</td>
+      <td>8.100</td>
+      <td>Parkfield-02, CA</td>
+      <td>6.0</td>
+      <td>Mw</td>
+      <td>80.53000</td>
+      <td>...</td>
+      <td>0.030253</td>
+      <td>0.017435</td>
+      <td>0.009625</td>
+      <td>0.005255</td>
+      <td>0.003526</td>
+      <td>0.001380</td>
+      <td>0.000833</td>
+      <td>0.000493</td>
+      <td>0.000355</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>21298 rows × 44 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Magnitude Type&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitude type boxplot (21298 datos)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Magnitude Type&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5729c467bb0f9634df743d294b81355a8062273bfb619263a683c0fe8430df5d.png" src="_images/5729c467bb0f9634df743d294b81355a8062273bfb619263a683c0fe8430df5d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Magnitude Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Mw&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Record Sequence Number&#39;</span><span class="p">,</span><span class="s1">&#39;Earthquake Name&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Magnitude Type&#39;</span><span class="p">,</span><span class="s1">&#39;EpiD (km)&#39;</span><span class="p">,</span><span class="s1">&#39;Joyner-Boore Dist. (km)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;RmsD (km)&#39;</span><span class="p">,</span><span class="s1">&#39;Rx&#39;</span><span class="p">,</span><span class="s1">&#39;Vs30 (m/s) selected for analysis&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Tmax&#39;</span><span class="p">,</span> <span class="s1">&#39;Lowest Usable Freq - Ave. Component (Hz)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;PGA (g)&#39;</span><span class="p">,</span><span class="s1">&#39;PGV (cm/sec)&#39;</span><span class="p">,</span><span class="s1">&#39;PGD (cm)&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hypocenter Latitude (deg)</th>
+      <th>Hypocenter Longitude (deg)</th>
+      <th>Station Latitude</th>
+      <th>Station Longitude</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Magnitude</th>
+      <th>Rhypo_OpenQuake</th>
+      <th>Rrup_OpenQuake</th>
+      <th>Soil_Class</th>
+      <th>T_0.01_RotD50</th>
+      <th>...</th>
+      <th>T_0.5_RotD50</th>
+      <th>T_0.75_RotD50</th>
+      <th>T_1.0_RotD50</th>
+      <th>T_1.5_RotD50</th>
+      <th>T_2.0_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>46.61000</td>
+      <td>-111.96000</td>
+      <td>46.58000</td>
+      <td>-112.0300</td>
+      <td>6.000</td>
+      <td>6.00</td>
+      <td>8.71000</td>
+      <td>2.86</td>
+      <td>3</td>
+      <td>0.161934</td>
+      <td>...</td>
+      <td>0.143020</td>
+      <td>0.092829</td>
+      <td>0.101136</td>
+      <td>0.059109</td>
+      <td>0.035895</td>
+      <td>0.015257</td>
+      <td>0.007987</td>
+      <td>0.004644</td>
+      <td>0.003037</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40.40000</td>
+      <td>-125.10000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>5.80</td>
+      <td>74.17000</td>
+      <td>71.57</td>
+      <td>4</td>
+      <td>0.040997</td>
+      <td>...</td>
+      <td>0.082295</td>
+      <td>0.056946</td>
+      <td>0.035785</td>
+      <td>0.016157</td>
+      <td>0.009347</td>
+      <td>0.002960</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40.30000</td>
+      <td>-124.80000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>5.50</td>
+      <td>55.78000</td>
+      <td>53.58</td>
+      <td>4</td>
+      <td>0.122486</td>
+      <td>...</td>
+      <td>0.223093</td>
+      <td>0.091499</td>
+      <td>0.093659</td>
+      <td>0.026785</td>
+      <td>0.013654</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>32.76010</td>
+      <td>-115.41620</td>
+      <td>32.79400</td>
+      <td>-115.5490</td>
+      <td>8.800</td>
+      <td>6.95</td>
+      <td>15.69000</td>
+      <td>6.09</td>
+      <td>4</td>
+      <td>0.234619</td>
+      <td>...</td>
+      <td>0.629952</td>
+      <td>0.435350</td>
+      <td>0.351286</td>
+      <td>0.197357</td>
+      <td>0.215745</td>
+      <td>0.106360</td>
+      <td>0.046965</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>40.28300</td>
+      <td>-124.80000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>5.80</td>
+      <td>56.85000</td>
+      <td>53.77</td>
+      <td>4</td>
+      <td>0.107289</td>
+      <td>...</td>
+      <td>0.172930</td>
+      <td>0.124190</td>
+      <td>0.085661</td>
+      <td>0.040947</td>
+      <td>0.019499</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>21293</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.58230</td>
+      <td>-122.4201</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>35.89050</td>
+      <td>35.63</td>
+      <td>2</td>
+      <td>0.005176</td>
+      <td>...</td>
+      <td>0.001476</td>
+      <td>0.000493</td>
+      <td>0.000260</td>
+      <td>0.000114</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21294</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.40370</td>
+      <td>-122.1760</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>51.66153</td>
+      <td>51.36</td>
+      <td>3</td>
+      <td>0.000505</td>
+      <td>...</td>
+      <td>0.000350</td>
+      <td>0.000166</td>
+      <td>0.000093</td>
+      <td>0.000043</td>
+      <td>0.000016</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21295</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.58640</td>
+      <td>-122.5022</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>39.34073</td>
+      <td>39.13</td>
+      <td>3</td>
+      <td>0.003058</td>
+      <td>...</td>
+      <td>0.000883</td>
+      <td>0.000366</td>
+      <td>0.000123</td>
+      <td>0.000052</td>
+      <td>0.000032</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21296</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.94910</td>
+      <td>-122.4085</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>19.97517</td>
+      <td>19.44</td>
+      <td>2</td>
+      <td>0.001620</td>
+      <td>...</td>
+      <td>0.000810</td>
+      <td>0.000282</td>
+      <td>0.000159</td>
+      <td>0.000067</td>
+      <td>0.000032</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21297</th>
+      <td>35.81700</td>
+      <td>-120.36500</td>
+      <td>35.21263</td>
+      <td>-120.8553</td>
+      <td>8.100</td>
+      <td>6.00</td>
+      <td>81.00000</td>
+      <td>78.32</td>
+      <td>3</td>
+      <td>0.010478</td>
+      <td>...</td>
+      <td>0.030253</td>
+      <td>0.017435</td>
+      <td>0.009625</td>
+      <td>0.005255</td>
+      <td>0.003526</td>
+      <td>0.001380</td>
+      <td>0.000833</td>
+      <td>0.000493</td>
+      <td>0.000355</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>12899 rows × 31 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">31</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;T_0.01_RotD50&#39;, &#39;T_0.02_RotD50&#39;, &#39;T_0.03_RotD50&#39;, &#39;T_0.04_RotD50&#39;,
+       &#39;T_0.05_RotD50&#39;, &#39;T_0.075_RotD50&#39;, &#39;T_0.1_RotD50&#39;, &#39;T_0.15_RotD50&#39;,
+       &#39;T_0.2_RotD50&#39;, &#39;T_0.25_RotD50&#39;, &#39;T_0.3_RotD50&#39;, &#39;T_0.4_RotD50&#39;,
+       &#39;T_0.5_RotD50&#39;, &#39;T_0.75_RotD50&#39;, &#39;T_1.0_RotD50&#39;, &#39;T_1.5_RotD50&#39;,
+       &#39;T_2.0_RotD50&#39;, &#39;T_3.0_RotD50&#39;, &#39;T_4.0_RotD50&#39;, &#39;T_5.0_RotD50&#39;,
+       &#39;T_6.0_RotD50&#39;, &#39;T_10.0_RotD50&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Hypocenter Latitude (deg)&#39;, &#39;Hypocenter Longitude (deg)&#39;,
+       &#39;Station Latitude&#39;, &#39;Station Longitude&#39;, &#39;Hypocenter Depth (km)&#39;,
+       &#39;Magnitude&#39;, &#39;Rhypo_OpenQuake&#39;, &#39;Rrup_OpenQuake&#39;, &#39;Soil_Class&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asumiendo que tu DataFrame se llama df</span>
+<span class="c1"># 1. Descriptivos</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Magnitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">,</span> <span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># 2. Histogramas</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Magnitude&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Magnitude Distribution&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Hypocenter Depth Distribution&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rhypo Distribution&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rrup Distribution&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 3. Soil_Class</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Soil Class Distribution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 4. Relaciones bivariadas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitude vs Rrup by soil class&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Magnitude  Hypocenter Depth (km)  Rhypo_OpenQuake  Rrup_OpenQuake
+count  12899.000000           12899.000000     12899.000000    12899.000000
+mean       5.491133               9.535059       130.250791      119.096239
+std        1.300257               3.882544       128.989256      113.610083
+min        3.200000               0.020000         2.060000        0.050000
+25%        4.200000               6.973000        49.350000       43.160000
+50%        5.600000               9.000000        94.268230       86.320000
+75%        6.630000              12.000000       176.580350      165.395000
+max        7.900000              41.000000      1754.710000     1532.660000
+</pre></div>
+</div>
+<img alt="_images/369b6abe7c4cc137d6b80b4d80d09cd040c516dddba641f8b6cb5af7aeff1941.png" src="_images/369b6abe7c4cc137d6b80b4d80d09cd040c516dddba641f8b6cb5af7aeff1941.png" />
+<img alt="_images/4de14e385bcd958a5865c87284ffc8760e591d73bc82e4cb6f95bcac7db01aea.png" src="_images/4de14e385bcd958a5865c87284ffc8760e591d73bc82e4cb6f95bcac7db01aea.png" />
+<img alt="_images/204e2a670d787af34a2d72ea4bd0e30777c6cb614d2e72ad4793f2956f1ea1f1.png" src="_images/204e2a670d787af34a2d72ea4bd0e30777c6cb614d2e72ad4793f2956f1ea1f1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Magnitude&#39;</span><span class="p">,</span><span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">,</span><span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">,</span><span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+
+<span class="c1"># Anotar manualmente</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corr</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corr</span><span class="p">)):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> 
+                <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriz de correlación&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1fe1e9a222800f51c8470fcf15537390c04f8bde4674d70641cfdab3ed14d906.png" src="_images/1fe1e9a222800f51c8470fcf15537390c04f8bde4674d70641cfdab3ed14d906.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="c1">#ax.set_extent([-85, -65, -5, 15])  # límites en grados (ej: norte de Suramérica)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hypocenter Longitude (deg)&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hypocenter Latitude (deg)&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Seismic Epicenters Map&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/802dd8533bbe0a5b2f0d26e6020e95cab6b3f37c8d720ab0eadfaa4c327f969a.png" src="_images/802dd8533bbe0a5b2f0d26e6020e95cab6b3f37c8d720ab0eadfaa4c327f969a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Límites opcionales: norte de Suramérica</span>
+<span class="c1"># ax.set_extent([-85, -65, -5, 15])  </span>
+
+<span class="c1"># Agregar elementos del mapa</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Estaciones (ej. en azul)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Station Longitude&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Station Latitude&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Stations&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Hipocentros (ej. en rojo)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hypocenter Longitude (deg)&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Hypocenter Latitude (deg)&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hypocenters&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Título y leyenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Seismic Stations and Hypocenters Map&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/57a834de137fd67a3f1213dec9b4baf8fe68958bc989cbbbf034b71e52e58fa3.png" src="_images/57a834de137fd67a3f1213dec9b4baf8fe68958bc989cbbbf034b71e52e58fa3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Magnitud vs Profundidad</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Hypocenter Depth (km)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitud vs Profundidad Hipocentral&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Profundidad (km)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 2. Magnitud vs Distancia hipocentral</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rhypo_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitud vs Distancia Hipocentral&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distancia Hipocentral (km)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 3. Magnitud vs Distancia de ruptura</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitud vs Distancia de Ruptura&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distancia de Ruptura (km)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 4. Profundidad vs Distancia de ruptura</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Hypocenter Depth (km)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Profundidad vs Distancia de Ruptura&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Profundidad (km)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Distancia de Ruptura (km)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 5. Magnitud vs Clase de suelo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitud según Clase de Suelo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Clase de Suelo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitud&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/85b8492514caecb1979fbc82a312eb22a8070ca2a50e2e8213cd728883be53a1.png" src="_images/85b8492514caecb1979fbc82a312eb22a8070ca2a50e2e8213cd728883be53a1.png" />
+<img alt="_images/59dcd209983e7ba5835fc0052a4f59436f75d10910425d75e0325451749f627f.png" src="_images/59dcd209983e7ba5835fc0052a4f59436f75d10910425d75e0325451749f627f.png" />
+<img alt="_images/f7d882792bdd3810f5f16196f7acec4545d0c7728d729e3a46ec2261dd0b0fe5.png" src="_images/f7d882792bdd3810f5f16196f7acec4545d0c7728d729e3a46ec2261dd0b0fe5.png" />
+<img alt="_images/2dd1a2f3c768743ab7f67e10f02a62b66c0da95371f1c2499a6558fcf800b3d3.png" src="_images/2dd1a2f3c768743ab7f67e10f02a62b66c0da95371f1c2499a6558fcf800b3d3.png" />
+<img alt="_images/f78499ff350fcbfb4c87f3546476126000cef63367670377c92e567c60b0be80.png" src="_images/f78499ff350fcbfb4c87f3546476126000cef63367670377c92e567c60b0be80.png" />
+</div>
+</div>
+<section id="relaciones-con-la-variable-de-respuesta">
+<h3>Relaciones con la variable de respuesta<a class="headerlink" href="#relaciones-con-la-variable-de-respuesta" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="n">periodos_ref</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;T_0.01_RotD50&quot;</span><span class="p">,</span> <span class="s2">&quot;T_0.1_RotD50&quot;</span><span class="p">,</span> <span class="s2">&quot;T_1.0_RotD50&quot;</span><span class="p">,</span> <span class="s2">&quot;T_10.0_RotD50&quot;</span><span class="p">]</span>
+
+<span class="c1"># --- 1. Distribución de Sa(T) ---</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">periodos_ref</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución de Sa(</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> s)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sa [g]&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fb7fafba38971d3026bb3bcabdb3b663ef8d7ff02b0612182c4d901dc8ec953b.png" src="_images/fb7fafba38971d3026bb3bcabdb3b663ef8d7ff02b0612182c4d901dc8ec953b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 2. Boxplots por clase de suelo ---</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">periodos_ref</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sa(</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> s) según Clase de Suelo&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Clase de Suelo&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Sa [g]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e70e29a54a650fcc39954774c61c90389b14b6fafedc8de1a0751d083d214a15.png" src="_images/e70e29a54a650fcc39954774c61c90389b14b6fafedc8de1a0751d083d214a15.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 3. Sa(T) vs Magnitud ---</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">periodos_ref</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Magnitud vs Sa(</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> s)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Mw&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Sa [g]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fbb9aa3b9c3ecf6c999266acf61f1761a77afae4ff20b7509d9b0b0f66271929.png" src="_images/fbb9aa3b9c3ecf6c999266acf61f1761a77afae4ff20b7509d9b0b0f66271929.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 4. Sa(T) vs Distancia (Rrup) ---</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">periodos_ref</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rrup vs Sa(</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> s)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Rrup (km)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Sa [g]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/967f6e101c4a6af30a28ec01619e6a2dc8d6a2932b3a07e425038962bbfef11a.png" src="_images/967f6e101c4a6af30a28ec01619e6a2dc8d6a2932b3a07e425038962bbfef11a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 5. Espectro promedio ---</span>
+<span class="n">cols_spectra</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s2">&quot;RotD50&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols_spectra</span><span class="p">]</span>
+<span class="n">Sa_mean</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cols_spectra</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Sa_mean</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Periodo (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sa promedio [g]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Espectro promedio RotD50&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/746dfeacf6805036d1d75e32147b7e5b1a420f71aac4d1f9214d9b0ba441f9a2.png" src="_images/746dfeacf6805036d1d75e32147b7e5b1a420f71aac4d1f9214d9b0ba441f9a2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="eda-colombia">
+<h2>EDA Colombia<a class="headerlink" href="#eda-colombia" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;C:/Users/elias/OneDrive/Desktop/MachineLearning/FinalProjectDL/Final_Project/CopiaDataBaseSGC.xlsx&#39;</span><span class="p">)</span>
+<span class="n">df_Col</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Record Sequence Number</th>
+      <th>EQID</th>
+      <th>Epicenter Latitude (deg; positive N)</th>
+      <th>Epicenter Longitude (deg; positive E)</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Magnitude</th>
+      <th>Magnitude type</th>
+      <th>Tectonic environment (Crustal; Inslab; Interface; Stable; Deep; Volcanic; Oceanic_crust)</th>
+      <th>Nodal Plane 1 Strike (deg)</th>
+      <th>Nodal Plane 1 Dip (deg)</th>
+      <th>...</th>
+      <th>T_2.5_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_7.0_RotD50</th>
+      <th>T_7.5_RotD50</th>
+      <th>T_8.0_RotD50</th>
+      <th>T_9.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>76</td>
+      <td>CO_19940913100134</td>
+      <td>7.105</td>
+      <td>-76.665</td>
+      <td>14.0</td>
+      <td>6.0202</td>
+      <td>Mw</td>
+      <td>Crustal</td>
+      <td>4</td>
+      <td>64</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>79</td>
+      <td>CO_19961104172500</td>
+      <td>7.364</td>
+      <td>-77.380</td>
+      <td>14.0</td>
+      <td>6.2562</td>
+      <td>Mw</td>
+      <td>Crustal</td>
+      <td>188</td>
+      <td>43</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>89</td>
+      <td>CO_19961104172500</td>
+      <td>7.364</td>
+      <td>-77.380</td>
+      <td>14.0</td>
+      <td>6.2562</td>
+      <td>Mw</td>
+      <td>Crustal</td>
+      <td>188</td>
+      <td>43</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>93</td>
+      <td>CO_20070424085334</td>
+      <td>5.621</td>
+      <td>-75.895</td>
+      <td>50.6</td>
+      <td>5.1307</td>
+      <td>Mw</td>
+      <td>Crustal</td>
+      <td>154</td>
+      <td>23</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>95</td>
+      <td>CO_20080524192044</td>
+      <td>4.374</td>
+      <td>-73.708</td>
+      <td>14.7</td>
+      <td>5.8671</td>
+      <td>Mw</td>
+      <td>Crustal</td>
+      <td>196</td>
+      <td>82</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8806</th>
+      <td>6438</td>
+      <td>CO_20190616161836</td>
+      <td>6.820</td>
+      <td>-73.150</td>
+      <td>143.0</td>
+      <td>4.6000</td>
+      <td>Mw</td>
+      <td>Deep</td>
+      <td>313</td>
+      <td>76</td>
+      <td>...</td>
+      <td>0.006470</td>
+      <td>0.004137</td>
+      <td>0.001410</td>
+      <td>0.000652</td>
+      <td>0.000443</td>
+      <td>0.000404</td>
+      <td>0.000386</td>
+      <td>0.000362</td>
+      <td>0.000310</td>
+      <td>0.000262</td>
+    </tr>
+    <tr>
+      <th>8807</th>
+      <td>7490</td>
+      <td>CO_20180108125827</td>
+      <td>6.790</td>
+      <td>-72.980</td>
+      <td>153.4</td>
+      <td>4.9912</td>
+      <td>Mw</td>
+      <td>Deep</td>
+      <td>57</td>
+      <td>66</td>
+      <td>...</td>
+      <td>0.000897</td>
+      <td>0.000889</td>
+      <td>0.001219</td>
+      <td>0.000726</td>
+      <td>0.000456</td>
+      <td>0.000283</td>
+      <td>0.000231</td>
+      <td>0.000190</td>
+      <td>0.000151</td>
+      <td>0.000114</td>
+    </tr>
+    <tr>
+      <th>8808</th>
+      <td>8434</td>
+      <td>CO_20190616161836</td>
+      <td>6.820</td>
+      <td>-73.150</td>
+      <td>143.0</td>
+      <td>4.6000</td>
+      <td>Mw</td>
+      <td>Deep</td>
+      <td>313</td>
+      <td>76</td>
+      <td>...</td>
+      <td>0.004955</td>
+      <td>0.002588</td>
+      <td>0.001379</td>
+      <td>0.000911</td>
+      <td>0.000590</td>
+      <td>0.000530</td>
+      <td>0.000576</td>
+      <td>0.000566</td>
+      <td>0.000515</td>
+      <td>0.000518</td>
+    </tr>
+    <tr>
+      <th>8809</th>
+      <td>1340</td>
+      <td>CO_20150221222646</td>
+      <td>4.670</td>
+      <td>-76.180</td>
+      <td>95.0</td>
+      <td>5.1699</td>
+      <td>Mw</td>
+      <td>Inslab</td>
+      <td>93</td>
+      <td>51</td>
+      <td>...</td>
+      <td>0.000327</td>
+      <td>0.000221</td>
+      <td>0.000170</td>
+      <td>0.000152</td>
+      <td>0.000102</td>
+      <td>0.000080</td>
+      <td>0.000074</td>
+      <td>0.000072</td>
+      <td>0.000058</td>
+      <td>0.000059</td>
+    </tr>
+    <tr>
+      <th>8810</th>
+      <td>1530</td>
+      <td>CO_20050421033924</td>
+      <td>4.985</td>
+      <td>-76.263</td>
+      <td>101.9</td>
+      <td>5.2333</td>
+      <td>Mw</td>
+      <td>Inslab</td>
+      <td>232</td>
+      <td>56</td>
+      <td>...</td>
+      <td>0.194430</td>
+      <td>0.124372</td>
+      <td>0.061743</td>
+      <td>0.032255</td>
+      <td>0.023417</td>
+      <td>0.017270</td>
+      <td>0.014975</td>
+      <td>0.013055</td>
+      <td>0.010115</td>
+      <td>0.008011</td>
+    </tr>
+  </tbody>
+</table>
+<p>8811 rows × 106 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columnas_a_eliminar</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Record Sequence Number&quot;</span><span class="p">,</span> <span class="s2">&quot;Station ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Station Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Magnitude type&quot;</span><span class="p">,</span> <span class="s2">&quot;EQID&quot;</span><span class="p">,</span> <span class="s2">&quot;Valor_T1.5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Tmax&quot;</span><span class="p">,</span> 
+    <span class="c1">#&quot;Epicenter Latitude (deg; positive N)&quot;, &quot;Epicenter Longitude (deg; positive E)&quot;,</span>
+    <span class="c1">#&quot;Station Latitude (deg positive N)&quot;, &quot;Station Longitude (deg positive E)&quot;,</span>
+    <span class="s2">&quot;Topografía&quot;</span><span class="p">,</span> <span class="s2">&quot;Geología&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Nodal Plane 1 Rake Angle (deg)&quot;</span><span class="p">,</span> <span class="s2">&quot;Nodal Plane 2 Rake Angle (deg)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Nodal Plane 2 Dip (deg)&quot;</span><span class="p">,</span> <span class="s2">&quot;Nodal Plane 2 Strike (deg)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rx_OpenQuake&quot;</span><span class="p">,</span> <span class="s2">&quot;Ry0_OpenQuake&quot;</span><span class="p">,</span> <span class="s2">&quot;Rjb_OpenQuake&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Repi_OpenQuake&quot;</span><span class="p">,</span>
+    <span class="c1"># &quot;Rhypo_OpenQuake&quot;,</span>
+    <span class="s2">&quot;Station Elevation (m)&quot;</span><span class="p">,</span>
+    <span class="c1">#&quot;Soil_Class&quot;,</span>
+    <span class="s2">&quot;Nodal Plane 1 Strike (deg)&quot;</span><span class="p">,</span> <span class="s2">&quot;Nodal Plane 1 Dip (deg)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Fault Plane (1; 2; X)&quot;</span><span class="p">,</span> <span class="s2">&quot;Style-of-Faulting (S; R; N; U)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Tn&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;Record Sequence Number&#39;</span><span class="p">,</span><span class="s1">&#39;EQID&#39;</span><span class="p">,</span><span class="s1">&#39;Magnitude type&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Tectonic environment (Crustal; Inslab; Interface; Stable; Deep; Volcanic; Oceanic_crust)&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span> <span class="o">=</span> <span class="n">df_Col</span><span class="p">[</span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;Tectonic environment (Crustal; Inslab; Interface; Stable; Deep; Volcanic; Oceanic_crust)&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Crustal&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">columnas_a_eliminar</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Epicenter Latitude (deg; positive N)</th>
+      <th>Epicenter Longitude (deg; positive E)</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Magnitude</th>
+      <th>Station Latitude (deg positive N)</th>
+      <th>Station Longitude (deg positive E)</th>
+      <th>Soil_Class</th>
+      <th>Rrup_OpenQuake</th>
+      <th>Rhypo_OpenQuake</th>
+      <th>T_0.01_RotD50</th>
+      <th>...</th>
+      <th>T_2.5_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_7.0_RotD50</th>
+      <th>T_7.5_RotD50</th>
+      <th>T_8.0_RotD50</th>
+      <th>T_9.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.105</td>
+      <td>-76.665</td>
+      <td>14.0</td>
+      <td>6.0202</td>
+      <td>5.6630</td>
+      <td>-75.8970</td>
+      <td>1</td>
+      <td>174.684394</td>
+      <td>181.353681</td>
+      <td>4.847060</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.364</td>
+      <td>-77.380</td>
+      <td>14.0</td>
+      <td>6.2562</td>
+      <td>5.6630</td>
+      <td>-75.8970</td>
+      <td>1</td>
+      <td>244.405678</td>
+      <td>254.752031</td>
+      <td>1.814338</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.364</td>
+      <td>-77.380</td>
+      <td>14.0</td>
+      <td>6.2562</td>
+      <td>5.2614</td>
+      <td>-75.8125</td>
+      <td>2</td>
+      <td>284.525886</td>
+      <td>295.168858</td>
+      <td>1.609079</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.621</td>
+      <td>-75.895</td>
+      <td>50.6</td>
+      <td>5.1307</td>
+      <td>5.2614</td>
+      <td>-75.8125</td>
+      <td>2</td>
+      <td>65.201764</td>
+      <td>67.842661</td>
+      <td>111.286998</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.374</td>
+      <td>-73.708</td>
+      <td>14.7</td>
+      <td>5.8671</td>
+      <td>5.2614</td>
+      <td>-75.8125</td>
+      <td>2</td>
+      <td>247.402211</td>
+      <td>254.069428</td>
+      <td>0.832051</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8798</th>
+      <td>3.440</td>
+      <td>-74.190</td>
+      <td>10.0</td>
+      <td>4.1000</td>
+      <td>1.1890</td>
+      <td>-77.3220</td>
+      <td>5</td>
+      <td>428.091130</td>
+      <td>428.905798</td>
+      <td>0.003828</td>
+      <td>...</td>
+      <td>0.001570</td>
+      <td>0.001066</td>
+      <td>0.000630</td>
+      <td>0.000329</td>
+      <td>0.000232</td>
+      <td>0.000164</td>
+      <td>0.000139</td>
+      <td>0.000118</td>
+      <td>0.000086</td>
+      <td>0.000065</td>
+    </tr>
+    <tr>
+      <th>8799</th>
+      <td>3.430</td>
+      <td>-74.200</td>
+      <td>18.0</td>
+      <td>4.0000</td>
+      <td>1.1890</td>
+      <td>-77.3220</td>
+      <td>5</td>
+      <td>426.956629</td>
+      <td>427.631871</td>
+      <td>0.005081</td>
+      <td>...</td>
+      <td>0.001319</td>
+      <td>0.000884</td>
+      <td>0.000467</td>
+      <td>0.000244</td>
+      <td>0.000168</td>
+      <td>0.000120</td>
+      <td>0.000102</td>
+      <td>0.000088</td>
+      <td>0.000069</td>
+      <td>0.000061</td>
+    </tr>
+    <tr>
+      <th>8800</th>
+      <td>3.410</td>
+      <td>-74.170</td>
+      <td>15.0</td>
+      <td>4.3000</td>
+      <td>1.2097</td>
+      <td>-77.2563</td>
+      <td>5</td>
+      <td>420.098899</td>
+      <td>421.640421</td>
+      <td>0.008593</td>
+      <td>...</td>
+      <td>0.003315</td>
+      <td>0.002870</td>
+      <td>0.002334</td>
+      <td>0.002409</td>
+      <td>0.001619</td>
+      <td>0.000914</td>
+      <td>0.000798</td>
+      <td>0.000681</td>
+      <td>0.000466</td>
+      <td>0.000338</td>
+    </tr>
+    <tr>
+      <th>8801</th>
+      <td>7.270</td>
+      <td>-78.640</td>
+      <td>4.0</td>
+      <td>5.1000</td>
+      <td>1.2097</td>
+      <td>-77.2563</td>
+      <td>5</td>
+      <td>689.662530</td>
+      <td>691.759807</td>
+      <td>0.014393</td>
+      <td>...</td>
+      <td>0.001481</td>
+      <td>0.000820</td>
+      <td>0.000398</td>
+      <td>0.000212</td>
+      <td>0.000137</td>
+      <td>0.000092</td>
+      <td>0.000081</td>
+      <td>0.000075</td>
+      <td>0.000060</td>
+      <td>0.000049</td>
+    </tr>
+    <tr>
+      <th>8802</th>
+      <td>13.160</td>
+      <td>-81.050</td>
+      <td>10.0</td>
+      <td>5.6321</td>
+      <td>3.3721</td>
+      <td>-76.5300</td>
+      <td>5</td>
+      <td>1188.735771</td>
+      <td>1196.423818</td>
+      <td>0.136376</td>
+      <td>...</td>
+      <td>0.001258</td>
+      <td>0.000699</td>
+      <td>0.000383</td>
+      <td>0.000222</td>
+      <td>0.000158</td>
+      <td>0.000110</td>
+      <td>0.000098</td>
+      <td>0.000092</td>
+      <td>0.000079</td>
+      <td>0.000065</td>
+    </tr>
+  </tbody>
+</table>
+<p>4625 rows × 82 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Descriptivos</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[[</span><span class="s1">&#39;Magnitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">,</span> <span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># 2. Histogramas</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;Magnitude&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Magnitude Distribution&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Hypocenter Depth Distribution&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rhypo Distribution&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rrup Distribution&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 3. Soil_Class</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_Col</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Soil Class Distribution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 4. Relaciones bivariadas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_Col</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnitude vs Rrup by soil class&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Magnitude  Hypocenter Depth (km)  Rhypo_OpenQuake  Rrup_OpenQuake
+count  4625.000000            4625.000000      4625.000000     4625.000000
+mean      4.888967              14.855676       603.941994      600.933626
+std       0.538996              11.010251       391.493761      390.569914
+min       3.800000               1.000000        15.963300       12.535892
+25%       4.410000              10.000000       272.109203      269.646771
+50%       4.861200              10.000000       521.087881      519.074539
+75%       5.106300              17.000000       858.798572      856.204208
+max       6.994800              58.700000      1729.619610     1719.484836
+</pre></div>
+</div>
+<img alt="_images/9e4ef1a3275b8a88cca9449e64a082d52a1f9fd553c34ddf0e4e15695fc7448b.png" src="_images/9e4ef1a3275b8a88cca9449e64a082d52a1f9fd553c34ddf0e4e15695fc7448b.png" />
+<img alt="_images/1b28f2c369c177c1728387ba4cf62c42c1b7773c45239f5dde8051a31b0a4e0c.png" src="_images/1b28f2c369c177c1728387ba4cf62c42c1b7773c45239f5dde8051a31b0a4e0c.png" />
+<img alt="_images/84a058dfc3b62bff939c4bc32d2b856d5cd0c5df66c05a57e0506275442189cb.png" src="_images/84a058dfc3b62bff939c4bc32d2b856d5cd0c5df66c05a57e0506275442189cb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>  <span class="c1"># límites en grados (ej: norte de Suramérica)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s2">&quot;Epicenter Longitude (deg; positive E)&quot;</span><span class="p">],</span> <span class="n">df_Col</span><span class="p">[</span><span class="s2">&quot;Epicenter Latitude (deg; positive N)&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Seismic Epicenters Map&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7f7e8c057d07ae1787f5d32301c4aa2830334b37481d57b62d35e00ce95ebeab.png" src="_images/7f7e8c057d07ae1787f5d32301c4aa2830334b37481d57b62d35e00ce95ebeab.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Límites opcionales: norte de Suramérica</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mi">85</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>  
+
+<span class="c1"># Agregar elementos del mapa</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Estaciones (ej. en azul)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s2">&quot;Station Longitude (deg positive E)&quot;</span><span class="p">],</span> <span class="n">df_Col</span><span class="p">[</span><span class="s2">&quot;Station Latitude (deg positive N)&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Stations&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Hipocentros (ej. en rojo)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_Col</span><span class="p">[</span><span class="s2">&quot;Epicenter Longitude (deg; positive E)&quot;</span><span class="p">],</span> <span class="n">df_Col</span><span class="p">[</span><span class="s2">&quot;Epicenter Latitude (deg; positive N)&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hypocenters&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Título y leyenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Seismic Stations and Hypocenters Map&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/26a1dd3b3a827026a882c726724e6209881adddcf20f2aed0f24cd298275b07b.png" src="_images/26a1dd3b3a827026a882c726724e6209881adddcf20f2aed0f24cd298275b07b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span> <span class="o">=</span> <span class="n">df_Col</span><span class="p">[</span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;T_0.01_RotD50&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mf">1e-4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- 4. Sa(T) vs Distancia (Rrup) ---</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">periodos_ref</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_Col</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rrup vs Sa(</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> s)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Rrup (km)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Sa [g]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5f3575506bbf32e06365b1bf26f0d9a78806c27db09b584c7cffe800bc716ab1.png" src="_images/5f3575506bbf32e06365b1bf26f0d9a78806c27db09b584c7cffe800bc716ab1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span><span class="p">[</span><span class="n">outputs</span><span class="p">]</span><span class="o">=</span><span class="n">df_Col</span><span class="p">[</span><span class="n">outputs</span><span class="p">]</span><span class="o">/</span><span class="mi">980</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="full-database">
+<h2>Full database<a class="headerlink" href="#full-database" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hypocenter Latitude (deg)</th>
+      <th>Hypocenter Longitude (deg)</th>
+      <th>Station Latitude</th>
+      <th>Station Longitude</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Magnitude</th>
+      <th>Rhypo_OpenQuake</th>
+      <th>Rrup_OpenQuake</th>
+      <th>Soil_Class</th>
+      <th>T_0.01_RotD50</th>
+      <th>...</th>
+      <th>T_0.5_RotD50</th>
+      <th>T_0.75_RotD50</th>
+      <th>T_1.0_RotD50</th>
+      <th>T_1.5_RotD50</th>
+      <th>T_2.0_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>46.61000</td>
+      <td>-111.96000</td>
+      <td>46.58000</td>
+      <td>-112.0300</td>
+      <td>6.000</td>
+      <td>6.00</td>
+      <td>8.71000</td>
+      <td>2.86</td>
+      <td>3</td>
+      <td>0.161934</td>
+      <td>...</td>
+      <td>0.143020</td>
+      <td>0.092829</td>
+      <td>0.101136</td>
+      <td>0.059109</td>
+      <td>0.035895</td>
+      <td>0.015257</td>
+      <td>0.007987</td>
+      <td>0.004644</td>
+      <td>0.003037</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40.40000</td>
+      <td>-125.10000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>5.80</td>
+      <td>74.17000</td>
+      <td>71.57</td>
+      <td>4</td>
+      <td>0.040997</td>
+      <td>...</td>
+      <td>0.082295</td>
+      <td>0.056946</td>
+      <td>0.035785</td>
+      <td>0.016157</td>
+      <td>0.009347</td>
+      <td>0.002960</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40.30000</td>
+      <td>-124.80000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>5.50</td>
+      <td>55.78000</td>
+      <td>53.58</td>
+      <td>4</td>
+      <td>0.122486</td>
+      <td>...</td>
+      <td>0.223093</td>
+      <td>0.091499</td>
+      <td>0.093659</td>
+      <td>0.026785</td>
+      <td>0.013654</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>32.76010</td>
+      <td>-115.41620</td>
+      <td>32.79400</td>
+      <td>-115.5490</td>
+      <td>8.800</td>
+      <td>6.95</td>
+      <td>15.69000</td>
+      <td>6.09</td>
+      <td>4</td>
+      <td>0.234619</td>
+      <td>...</td>
+      <td>0.629952</td>
+      <td>0.435350</td>
+      <td>0.351286</td>
+      <td>0.197357</td>
+      <td>0.215745</td>
+      <td>0.106360</td>
+      <td>0.046965</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>40.28300</td>
+      <td>-124.80000</td>
+      <td>40.57600</td>
+      <td>-124.2630</td>
+      <td>10.000</td>
+      <td>5.80</td>
+      <td>56.85000</td>
+      <td>53.77</td>
+      <td>4</td>
+      <td>0.107289</td>
+      <td>...</td>
+      <td>0.172930</td>
+      <td>0.124190</td>
+      <td>0.085661</td>
+      <td>0.040947</td>
+      <td>0.019499</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>21293</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.58230</td>
+      <td>-122.4201</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>35.89050</td>
+      <td>35.63</td>
+      <td>2</td>
+      <td>0.005176</td>
+      <td>...</td>
+      <td>0.001476</td>
+      <td>0.000493</td>
+      <td>0.000260</td>
+      <td>0.000114</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21294</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.40370</td>
+      <td>-122.1760</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>51.66153</td>
+      <td>51.36</td>
+      <td>3</td>
+      <td>0.000505</td>
+      <td>...</td>
+      <td>0.000350</td>
+      <td>0.000166</td>
+      <td>0.000093</td>
+      <td>0.000043</td>
+      <td>0.000016</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21295</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.58640</td>
+      <td>-122.5022</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>39.34073</td>
+      <td>39.13</td>
+      <td>3</td>
+      <td>0.003058</td>
+      <td>...</td>
+      <td>0.000883</td>
+      <td>0.000366</td>
+      <td>0.000123</td>
+      <td>0.000052</td>
+      <td>0.000032</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21296</th>
+      <td>37.86037</td>
+      <td>-122.23589</td>
+      <td>37.94910</td>
+      <td>-122.4085</td>
+      <td>8.465</td>
+      <td>3.60</td>
+      <td>19.97517</td>
+      <td>19.44</td>
+      <td>2</td>
+      <td>0.001620</td>
+      <td>...</td>
+      <td>0.000810</td>
+      <td>0.000282</td>
+      <td>0.000159</td>
+      <td>0.000067</td>
+      <td>0.000032</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21297</th>
+      <td>35.81700</td>
+      <td>-120.36500</td>
+      <td>35.21263</td>
+      <td>-120.8553</td>
+      <td>8.100</td>
+      <td>6.00</td>
+      <td>81.00000</td>
+      <td>78.32</td>
+      <td>3</td>
+      <td>0.010478</td>
+      <td>...</td>
+      <td>0.030253</td>
+      <td>0.017435</td>
+      <td>0.009625</td>
+      <td>0.005255</td>
+      <td>0.003526</td>
+      <td>0.001380</td>
+      <td>0.000833</td>
+      <td>0.000493</td>
+      <td>0.000355</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>12899 rows × 31 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Hypocenter Latitude (deg)&quot;</span><span class="p">:</span> <span class="s2">&quot;Seismic Latitude&quot;</span><span class="p">})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Hypocenter Longitude (deg)&quot;</span><span class="p">:</span> <span class="s2">&quot;Seismic Longitude&quot;</span><span class="p">})</span>
+<span class="n">df_Col</span> <span class="o">=</span> <span class="n">df_Col</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Epicenter Latitude (deg; positive N)&quot;</span><span class="p">:</span> <span class="s2">&quot;Seismic Latitude&quot;</span><span class="p">})</span>
+<span class="n">df_Col</span> <span class="o">=</span> <span class="n">df_Col</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Epicenter Longitude (deg; positive E)&quot;</span><span class="p">:</span> <span class="s2">&quot;Seismic Longitude&quot;</span><span class="p">})</span>
+<span class="n">df_Col</span> <span class="o">=</span> <span class="n">df_Col</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Station Latitude (deg positive N)&quot;</span><span class="p">:</span> <span class="s2">&quot;Station Latitude&quot;</span><span class="p">})</span>
+<span class="n">df_Col</span> <span class="o">=</span> <span class="n">df_Col</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Station Longitude (deg positive E)&quot;</span><span class="p">:</span> <span class="s2">&quot;Station Longitude&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">inputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Seismic Latitude&#39;, &#39;Seismic Longitude&#39;, &#39;Station Latitude&#39;,
+       &#39;Station Longitude&#39;, &#39;Hypocenter Depth (km)&#39;, &#39;Magnitude&#39;,
+       &#39;Rhypo_OpenQuake&#39;, &#39;Rrup_OpenQuake&#39;, &#39;Soil_Class&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="n">outputs</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">df_Col</span><span class="o">=</span><span class="n">df_Col</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span><span class="p">[</span><span class="s1">&#39;origen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;origen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_Col</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seismic Latitude</th>
+      <th>Seismic Longitude</th>
+      <th>Station Latitude</th>
+      <th>Station Longitude</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Magnitude</th>
+      <th>Rhypo_OpenQuake</th>
+      <th>Rrup_OpenQuake</th>
+      <th>Soil_Class</th>
+      <th>T_0.01_RotD50</th>
+      <th>...</th>
+      <th>T_0.75_RotD50</th>
+      <th>T_1.0_RotD50</th>
+      <th>T_1.5_RotD50</th>
+      <th>T_2.0_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+      <th>origen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7.105</td>
+      <td>-76.665</td>
+      <td>5.6630</td>
+      <td>-75.8970</td>
+      <td>14.0</td>
+      <td>6.0202</td>
+      <td>181.353681</td>
+      <td>174.684394</td>
+      <td>1</td>
+      <td>0.004946</td>
+      <td>...</td>
+      <td>0.008565</td>
+      <td>0.011731</td>
+      <td>0.008412</td>
+      <td>0.003945</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7.364</td>
+      <td>-77.380</td>
+      <td>5.6630</td>
+      <td>-75.8970</td>
+      <td>14.0</td>
+      <td>6.2562</td>
+      <td>254.752031</td>
+      <td>244.405678</td>
+      <td>1</td>
+      <td>0.001851</td>
+      <td>...</td>
+      <td>0.002285</td>
+      <td>0.001380</td>
+      <td>0.000781</td>
+      <td>0.000327</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.364</td>
+      <td>-77.380</td>
+      <td>5.2614</td>
+      <td>-75.8125</td>
+      <td>14.0</td>
+      <td>6.2562</td>
+      <td>295.168858</td>
+      <td>284.525886</td>
+      <td>2</td>
+      <td>0.001642</td>
+      <td>...</td>
+      <td>0.002577</td>
+      <td>0.001191</td>
+      <td>0.000454</td>
+      <td>0.000275</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.621</td>
+      <td>-75.895</td>
+      <td>5.2614</td>
+      <td>-75.8125</td>
+      <td>50.6</td>
+      <td>5.1307</td>
+      <td>67.842661</td>
+      <td>65.201764</td>
+      <td>2</td>
+      <td>0.113558</td>
+      <td>...</td>
+      <td>0.009564</td>
+      <td>0.005405</td>
+      <td>0.001989</td>
+      <td>0.001150</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.374</td>
+      <td>-73.708</td>
+      <td>5.2614</td>
+      <td>-75.8125</td>
+      <td>14.7</td>
+      <td>5.8671</td>
+      <td>254.069428</td>
+      <td>247.402211</td>
+      <td>2</td>
+      <td>0.000849</td>
+      <td>...</td>
+      <td>0.002152</td>
+      <td>0.002154</td>
+      <td>0.001308</td>
+      <td>0.000420</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8798</th>
+      <td>3.440</td>
+      <td>-74.190</td>
+      <td>1.1890</td>
+      <td>-77.3220</td>
+      <td>10.0</td>
+      <td>4.1000</td>
+      <td>428.905798</td>
+      <td>428.091130</td>
+      <td>5</td>
+      <td>0.000004</td>
+      <td>...</td>
+      <td>0.000002</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>1.087456e-06</td>
+      <td>6.427327e-07</td>
+      <td>3.359714e-07</td>
+      <td>2.371388e-07</td>
+      <td>6.632653e-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8799</th>
+      <td>3.430</td>
+      <td>-74.200</td>
+      <td>1.1890</td>
+      <td>-77.3220</td>
+      <td>18.0</td>
+      <td>4.0000</td>
+      <td>427.631871</td>
+      <td>426.956629</td>
+      <td>5</td>
+      <td>0.000005</td>
+      <td>...</td>
+      <td>0.000002</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>9.019724e-07</td>
+      <td>4.762469e-07</td>
+      <td>2.486122e-07</td>
+      <td>1.713980e-07</td>
+      <td>6.234694e-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8800</th>
+      <td>3.410</td>
+      <td>-74.170</td>
+      <td>1.2097</td>
+      <td>-77.2563</td>
+      <td>15.0</td>
+      <td>4.3000</td>
+      <td>421.640421</td>
+      <td>420.098899</td>
+      <td>5</td>
+      <td>0.000009</td>
+      <td>...</td>
+      <td>0.000013</td>
+      <td>0.000008</td>
+      <td>0.000003</td>
+      <td>0.000004</td>
+      <td>2.928746e-06</td>
+      <td>2.381339e-06</td>
+      <td>2.458191e-06</td>
+      <td>1.652310e-06</td>
+      <td>3.452092e-07</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8801</th>
+      <td>7.270</td>
+      <td>-78.640</td>
+      <td>1.2097</td>
+      <td>-77.2563</td>
+      <td>4.0</td>
+      <td>5.1000</td>
+      <td>691.759807</td>
+      <td>689.662530</td>
+      <td>5</td>
+      <td>0.000015</td>
+      <td>...</td>
+      <td>0.000003</td>
+      <td>0.000002</td>
+      <td>0.000002</td>
+      <td>0.000002</td>
+      <td>8.369194e-07</td>
+      <td>4.056827e-07</td>
+      <td>2.166969e-07</td>
+      <td>1.402816e-07</td>
+      <td>4.969388e-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8802</th>
+      <td>13.160</td>
+      <td>-81.050</td>
+      <td>3.3721</td>
+      <td>-76.5300</td>
+      <td>10.0</td>
+      <td>5.6321</td>
+      <td>1196.423818</td>
+      <td>1188.735771</td>
+      <td>5</td>
+      <td>0.000139</td>
+      <td>...</td>
+      <td>0.000003</td>
+      <td>0.000003</td>
+      <td>0.000002</td>
+      <td>0.000001</td>
+      <td>7.131480e-07</td>
+      <td>3.910684e-07</td>
+      <td>2.264020e-07</td>
+      <td>1.611959e-07</td>
+      <td>6.663265e-08</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>4619 rows × 32 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_Col</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Seismic Latitude</th>
+      <th>Seismic Longitude</th>
+      <th>Station Latitude</th>
+      <th>Station Longitude</th>
+      <th>Hypocenter Depth (km)</th>
+      <th>Magnitude</th>
+      <th>Rhypo_OpenQuake</th>
+      <th>Rrup_OpenQuake</th>
+      <th>Soil_Class</th>
+      <th>T_0.01_RotD50</th>
+      <th>...</th>
+      <th>T_0.75_RotD50</th>
+      <th>T_1.0_RotD50</th>
+      <th>T_1.5_RotD50</th>
+      <th>T_2.0_RotD50</th>
+      <th>T_3.0_RotD50</th>
+      <th>T_4.0_RotD50</th>
+      <th>T_5.0_RotD50</th>
+      <th>T_6.0_RotD50</th>
+      <th>T_10.0_RotD50</th>
+      <th>origen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>46.6100</td>
+      <td>-111.9600</td>
+      <td>46.5800</td>
+      <td>-112.0300</td>
+      <td>6.0</td>
+      <td>6.0000</td>
+      <td>8.710000</td>
+      <td>2.860000</td>
+      <td>3</td>
+      <td>0.161934</td>
+      <td>...</td>
+      <td>0.092829</td>
+      <td>0.101136</td>
+      <td>0.059109</td>
+      <td>0.035895</td>
+      <td>1.525704e-02</td>
+      <td>7.987177e-03</td>
+      <td>4.643577e-03</td>
+      <td>3.036607e-03</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>40.4000</td>
+      <td>-125.1000</td>
+      <td>40.5760</td>
+      <td>-124.2630</td>
+      <td>10.0</td>
+      <td>5.8000</td>
+      <td>74.170000</td>
+      <td>71.570000</td>
+      <td>4</td>
+      <td>0.040997</td>
+      <td>...</td>
+      <td>0.056946</td>
+      <td>0.035785</td>
+      <td>0.016157</td>
+      <td>0.009347</td>
+      <td>2.959554e-03</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>40.3000</td>
+      <td>-124.8000</td>
+      <td>40.5760</td>
+      <td>-124.2630</td>
+      <td>10.0</td>
+      <td>5.5000</td>
+      <td>55.780000</td>
+      <td>53.580000</td>
+      <td>4</td>
+      <td>0.122486</td>
+      <td>...</td>
+      <td>0.091499</td>
+      <td>0.093659</td>
+      <td>0.026785</td>
+      <td>0.013654</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>32.7601</td>
+      <td>-115.4162</td>
+      <td>32.7940</td>
+      <td>-115.5490</td>
+      <td>8.8</td>
+      <td>6.9500</td>
+      <td>15.690000</td>
+      <td>6.090000</td>
+      <td>4</td>
+      <td>0.234619</td>
+      <td>...</td>
+      <td>0.435350</td>
+      <td>0.351286</td>
+      <td>0.197357</td>
+      <td>0.215745</td>
+      <td>1.063604e-01</td>
+      <td>4.696507e-02</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40.2830</td>
+      <td>-124.8000</td>
+      <td>40.5760</td>
+      <td>-124.2630</td>
+      <td>10.0</td>
+      <td>5.8000</td>
+      <td>56.850000</td>
+      <td>53.770000</td>
+      <td>4</td>
+      <td>0.107289</td>
+      <td>...</td>
+      <td>0.124190</td>
+      <td>0.085661</td>
+      <td>0.040947</td>
+      <td>0.019499</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>17513</th>
+      <td>3.4400</td>
+      <td>-74.1900</td>
+      <td>1.1890</td>
+      <td>-77.3220</td>
+      <td>10.0</td>
+      <td>4.1000</td>
+      <td>428.905798</td>
+      <td>428.091130</td>
+      <td>5</td>
+      <td>0.000004</td>
+      <td>...</td>
+      <td>0.000002</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>1.087456e-06</td>
+      <td>6.427327e-07</td>
+      <td>3.359714e-07</td>
+      <td>2.371388e-07</td>
+      <td>6.632653e-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17514</th>
+      <td>3.4300</td>
+      <td>-74.2000</td>
+      <td>1.1890</td>
+      <td>-77.3220</td>
+      <td>18.0</td>
+      <td>4.0000</td>
+      <td>427.631871</td>
+      <td>426.956629</td>
+      <td>5</td>
+      <td>0.000005</td>
+      <td>...</td>
+      <td>0.000002</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>0.000001</td>
+      <td>9.019724e-07</td>
+      <td>4.762469e-07</td>
+      <td>2.486122e-07</td>
+      <td>1.713980e-07</td>
+      <td>6.234694e-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17515</th>
+      <td>3.4100</td>
+      <td>-74.1700</td>
+      <td>1.2097</td>
+      <td>-77.2563</td>
+      <td>15.0</td>
+      <td>4.3000</td>
+      <td>421.640421</td>
+      <td>420.098899</td>
+      <td>5</td>
+      <td>0.000009</td>
+      <td>...</td>
+      <td>0.000013</td>
+      <td>0.000008</td>
+      <td>0.000003</td>
+      <td>0.000004</td>
+      <td>2.928746e-06</td>
+      <td>2.381339e-06</td>
+      <td>2.458191e-06</td>
+      <td>1.652310e-06</td>
+      <td>3.452092e-07</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17516</th>
+      <td>7.2700</td>
+      <td>-78.6400</td>
+      <td>1.2097</td>
+      <td>-77.2563</td>
+      <td>4.0</td>
+      <td>5.1000</td>
+      <td>691.759807</td>
+      <td>689.662530</td>
+      <td>5</td>
+      <td>0.000015</td>
+      <td>...</td>
+      <td>0.000003</td>
+      <td>0.000002</td>
+      <td>0.000002</td>
+      <td>0.000002</td>
+      <td>8.369194e-07</td>
+      <td>4.056827e-07</td>
+      <td>2.166969e-07</td>
+      <td>1.402816e-07</td>
+      <td>4.969388e-08</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17517</th>
+      <td>13.1600</td>
+      <td>-81.0500</td>
+      <td>3.3721</td>
+      <td>-76.5300</td>
+      <td>10.0</td>
+      <td>5.6321</td>
+      <td>1196.423818</td>
+      <td>1188.735771</td>
+      <td>5</td>
+      <td>0.000139</td>
+      <td>...</td>
+      <td>0.000003</td>
+      <td>0.000003</td>
+      <td>0.000002</td>
+      <td>0.000001</td>
+      <td>7.131480e-07</td>
+      <td>3.910684e-07</td>
+      <td>2.264020e-07</td>
+      <td>1.611959e-07</td>
+      <td>6.663265e-08</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>17518 rows × 32 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Límites opcionales: norte de Suramérica</span>
+<span class="c1"># ax.set_extent([-85, -65, -5, 15])  </span>
+<span class="c1">#ax.set_extent([-50, -50,50, 50])</span>
+<span class="c1"># Agregar elementos del mapa</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Estaciones (ej. en azul)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_total</span><span class="p">[</span><span class="s2">&quot;Station Longitude&quot;</span><span class="p">],</span> <span class="n">df_total</span><span class="p">[</span><span class="s2">&quot;Station Latitude&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span>  <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Stations&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Hipocentros (ej. en rojo)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_total</span><span class="p">[</span><span class="s2">&quot;Seismic Longitude&quot;</span><span class="p">],</span> <span class="n">df_total</span><span class="p">[</span><span class="s2">&quot;Seismic Latitude&quot;</span><span class="p">],</span> 
+            <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hypocenters&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># Título y leyenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Seismic Stations and Hypocenters Map of full database&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/09d4be17491cc0a82f0318229e7bf4bc5c1a1101c643548b44113239744d0585.png" src="_images/09d4be17491cc0a82f0318229e7bf4bc5c1a1101c643548b44113239744d0585.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_total</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Seismic Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Seismic Longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Station Latitude&#39;</span><span class="p">,</span><span class="s1">&#39;Station Longitude&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">df_total</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[[</span><span class="mi">31</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Hypocenter Depth (km)&#39;, &#39;Magnitude&#39;, &#39;Rhypo_OpenQuake&#39;,
+       &#39;Rrup_OpenQuake&#39;, &#39;Soil_Class&#39;, &#39;origen&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_total</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Hypocenter Depth (km)</th>
+      <td>17518.0</td>
+      <td>10.937106</td>
+      <td>6.965842</td>
+      <td>2.000000e-02</td>
+      <td>7.213000</td>
+      <td>10.000000</td>
+      <td>13.100000</td>
+      <td>58.700000</td>
+    </tr>
+    <tr>
+      <th>Magnitude</th>
+      <td>17518.0</td>
+      <td>5.332242</td>
+      <td>1.179824</td>
+      <td>3.200000e+00</td>
+      <td>4.300000</td>
+      <td>5.106300</td>
+      <td>6.300000</td>
+      <td>7.900000</td>
+    </tr>
+    <tr>
+      <th>Rhypo_OpenQuake</th>
+      <td>17518.0</td>
+      <td>255.209081</td>
+      <td>310.183244</td>
+      <td>2.060000e+00</td>
+      <td>61.952950</td>
+      <td>135.568624</td>
+      <td>287.376771</td>
+      <td>1754.710000</td>
+    </tr>
+    <tr>
+      <th>Rrup_OpenQuake</th>
+      <td>17518.0</td>
+      <td>246.202494</td>
+      <td>307.877064</td>
+      <td>5.000000e-02</td>
+      <td>55.592500</td>
+      <td>125.944481</td>
+      <td>277.000434</td>
+      <td>1719.484836</td>
+    </tr>
+    <tr>
+      <th>Soil_Class</th>
+      <td>17518.0</td>
+      <td>2.960726</td>
+      <td>0.867186</td>
+      <td>1.000000e+00</td>
+      <td>2.000000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>T_0.01_RotD50</th>
+      <td>17518.0</td>
+      <td>0.032556</td>
+      <td>0.086535</td>
+      <td>3.667953e-07</td>
+      <td>0.000222</td>
+      <td>0.002911</td>
+      <td>0.023384</td>
+      <td>1.793158</td>
+    </tr>
+    <tr>
+      <th>T_0.02_RotD50</th>
+      <td>17518.0</td>
+      <td>0.033239</td>
+      <td>0.089840</td>
+      <td>3.656215e-07</td>
+      <td>0.000254</td>
+      <td>0.003010</td>
+      <td>0.023473</td>
+      <td>1.838349</td>
+    </tr>
+    <tr>
+      <th>T_0.03_RotD50</th>
+      <td>17518.0</td>
+      <td>0.035031</td>
+      <td>0.097706</td>
+      <td>3.665763e-07</td>
+      <td>0.000263</td>
+      <td>0.003108</td>
+      <td>0.024302</td>
+      <td>2.173418</td>
+    </tr>
+    <tr>
+      <th>T_0.04_RotD50</th>
+      <td>17518.0</td>
+      <td>0.037643</td>
+      <td>0.106890</td>
+      <td>3.686024e-07</td>
+      <td>0.000271</td>
+      <td>0.003274</td>
+      <td>0.025276</td>
+      <td>2.444077</td>
+    </tr>
+    <tr>
+      <th>T_0.05_RotD50</th>
+      <td>17518.0</td>
+      <td>0.040928</td>
+      <td>0.115779</td>
+      <td>3.717809e-07</td>
+      <td>0.000284</td>
+      <td>0.003574</td>
+      <td>0.026838</td>
+      <td>2.545878</td>
+    </tr>
+    <tr>
+      <th>T_0.075_RotD50</th>
+      <td>17518.0</td>
+      <td>0.051362</td>
+      <td>0.146175</td>
+      <td>3.766346e-07</td>
+      <td>0.000323</td>
+      <td>0.004322</td>
+      <td>0.033223</td>
+      <td>2.918479</td>
+    </tr>
+    <tr>
+      <th>T_0.1_RotD50</th>
+      <td>17517.0</td>
+      <td>0.060334</td>
+      <td>0.167047</td>
+      <td>3.959980e-07</td>
+      <td>0.000337</td>
+      <td>0.005059</td>
+      <td>0.039365</td>
+      <td>4.619663</td>
+    </tr>
+    <tr>
+      <th>T_0.15_RotD50</th>
+      <td>17513.0</td>
+      <td>0.070405</td>
+      <td>0.192625</td>
+      <td>4.496561e-07</td>
+      <td>0.000365</td>
+      <td>0.005828</td>
+      <td>0.047943</td>
+      <td>3.770822</td>
+    </tr>
+    <tr>
+      <th>T_0.2_RotD50</th>
+      <td>17509.0</td>
+      <td>0.072776</td>
+      <td>0.196583</td>
+      <td>6.468004e-07</td>
+      <td>0.000391</td>
+      <td>0.006226</td>
+      <td>0.050548</td>
+      <td>4.325432</td>
+    </tr>
+    <tr>
+      <th>T_0.25_RotD50</th>
+      <td>17507.0</td>
+      <td>0.071116</td>
+      <td>0.193009</td>
+      <td>6.532471e-07</td>
+      <td>0.000393</td>
+      <td>0.006075</td>
+      <td>0.050470</td>
+      <td>4.202180</td>
+    </tr>
+    <tr>
+      <th>T_0.3_RotD50</th>
+      <td>17503.0</td>
+      <td>0.068978</td>
+      <td>0.188090</td>
+      <td>6.547189e-07</td>
+      <td>0.000359</td>
+      <td>0.005513</td>
+      <td>0.049528</td>
+      <td>4.814835</td>
+    </tr>
+    <tr>
+      <th>T_0.4_RotD50</th>
+      <td>17499.0</td>
+      <td>0.061804</td>
+      <td>0.169628</td>
+      <td>6.748307e-07</td>
+      <td>0.000299</td>
+      <td>0.004552</td>
+      <td>0.043362</td>
+      <td>3.347242</td>
+    </tr>
+    <tr>
+      <th>T_0.5_RotD50</th>
+      <td>17485.0</td>
+      <td>0.055013</td>
+      <td>0.152823</td>
+      <td>7.255787e-07</td>
+      <td>0.000245</td>
+      <td>0.003636</td>
+      <td>0.037724</td>
+      <td>3.287620</td>
+    </tr>
+    <tr>
+      <th>T_0.75_RotD50</th>
+      <td>17464.0</td>
+      <td>0.042251</td>
+      <td>0.124382</td>
+      <td>6.769173e-07</td>
+      <td>0.000145</td>
+      <td>0.002313</td>
+      <td>0.028222</td>
+      <td>3.388009</td>
+    </tr>
+    <tr>
+      <th>T_1.0_RotD50</th>
+      <td>17375.0</td>
+      <td>0.032423</td>
+      <td>0.095053</td>
+      <td>5.662867e-07</td>
+      <td>0.000096</td>
+      <td>0.001588</td>
+      <td>0.021931</td>
+      <td>2.096978</td>
+    </tr>
+    <tr>
+      <th>T_1.5_RotD50</th>
+      <td>17154.0</td>
+      <td>0.020973</td>
+      <td>0.061415</td>
+      <td>2.865295e-07</td>
+      <td>0.000048</td>
+      <td>0.000789</td>
+      <td>0.014234</td>
+      <td>1.174380</td>
+    </tr>
+    <tr>
+      <th>T_2.0_RotD50</th>
+      <td>16506.0</td>
+      <td>0.015448</td>
+      <td>0.046704</td>
+      <td>1.458209e-07</td>
+      <td>0.000030</td>
+      <td>0.000566</td>
+      <td>0.010489</td>
+      <td>1.126811</td>
+    </tr>
+    <tr>
+      <th>T_3.0_RotD50</th>
+      <td>15229.0</td>
+      <td>0.010109</td>
+      <td>0.031213</td>
+      <td>1.346649e-07</td>
+      <td>0.000014</td>
+      <td>0.000347</td>
+      <td>0.006517</td>
+      <td>1.063239</td>
+    </tr>
+    <tr>
+      <th>T_4.0_RotD50</th>
+      <td>13339.0</td>
+      <td>0.007701</td>
+      <td>0.022088</td>
+      <td>1.355982e-07</td>
+      <td>0.000008</td>
+      <td>0.000321</td>
+      <td>0.005311</td>
+      <td>0.386233</td>
+    </tr>
+    <tr>
+      <th>T_5.0_RotD50</th>
+      <td>11834.0</td>
+      <td>0.006475</td>
+      <td>0.018741</td>
+      <td>1.077202e-07</td>
+      <td>0.000004</td>
+      <td>0.000289</td>
+      <td>0.004697</td>
+      <td>0.343812</td>
+    </tr>
+    <tr>
+      <th>T_6.0_RotD50</th>
+      <td>10952.0</td>
+      <td>0.005625</td>
+      <td>0.015823</td>
+      <td>8.388087e-08</td>
+      <td>0.000003</td>
+      <td>0.000297</td>
+      <td>0.004485</td>
+      <td>0.332038</td>
+    </tr>
+    <tr>
+      <th>T_10.0_RotD50</th>
+      <td>9128.0</td>
+      <td>0.002444</td>
+      <td>0.006956</td>
+      <td>2.038235e-08</td>
+      <td>0.000001</td>
+      <td>0.000182</td>
+      <td>0.001864</td>
+      <td>0.254811</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">,</span> <span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  <span class="c1"># 2 filas x 2 columnas</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>  <span class="c1"># pasar a arreglo 1D para iterar fácil</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">element</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución de </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> por origen&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c8ec8918b42b45abe0c044f48028438b0a988815f04c5c9d848e2e08994e8d4b.png" src="_images/c8ec8918b42b45abe0c044f48028438b0a988815f04c5c9d848e2e08994e8d4b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hypocenter Depth (km)&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">,</span> <span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  <span class="c1"># 2 filas x 2 columnas</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> por origen&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0c92152a237d42a8e306e788aee4f7b41c9ad33740d62257b10f4f7f6aabdc6a.png" src="_images/0c92152a237d42a8e306e788aee4f7b41c9ad33740d62257b10f4f7f6aabdc6a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conteo absoluto</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_total</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;origen&#39;</span><span class="p">,</span> <span class="s1">&#39;Soil_Class&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+<span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Soil_Class&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;origen&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Soil Class por origen&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>origen  Soil_Class
+0       1                6
+        2             2477
+        3             7770
+        4             2245
+        5              401
+1       1              838
+        2             1153
+        3             1426
+        4              821
+        5              381
+dtype: int64
+</pre></div>
+</div>
+<img alt="_images/2232894070022864869b7a49b2e2839ed7ba86956298f0c2c2ea24988d9b3aa3.png" src="_images/2232894070022864869b7a49b2e2839ed7ba86956298f0c2c2ea24988d9b3aa3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_total</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Pairplot comparativo por origen&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9c109bf2192024df6b54557f36a1c4862a178ea1b29b75c82a1538c3244b6596.png" src="_images/9c109bf2192024df6b54557f36a1c4862a178ea1b29b75c82a1538c3244b6596.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span>          <span class="c1"># Color según origen</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Soil_Class&quot;</span><span class="p">,</span>    <span class="c1"># Marcador según tipo de suelo</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>             <span class="c1"># Transparencia para ver densidad</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">40</span>                  <span class="c1"># Tamaño de puntos</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>  <span class="c1"># Escala logarítmica en X</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Real dataset</span><span class="se">\n</span><span class="s2">Rrup vs Magnitude</span><span class="se">\n</span><span class="s2">Color: Origen | Shape: Soil Class&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Rrup (km)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitude (Mw)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>  <span class="c1"># Mover leyenda afuera</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/727cafd70cf212ad746e494994dd7c4e088685ff30772691f2e9159347103853.png" src="_images/727cafd70cf212ad746e494994dd7c4e088685ff30772691f2e9159347103853.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soil_classes</span> <span class="o">=</span> <span class="n">df_total</span><span class="p">[</span><span class="s1">&#39;Soil_Class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># tomar 5 tipos de suelo</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">soil</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">soil_classes</span><span class="p">):</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">df_total</span><span class="p">[</span><span class="n">df_total</span><span class="p">[</span><span class="s1">&#39;Soil_Class&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">soil</span><span class="p">]</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">subset</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Rrup_OpenQuake&quot;</span><span class="p">,</span> 
+        <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Magnitude&quot;</span><span class="p">,</span>
+        <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span>      
+        <span class="n">style</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span>    
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Soil Class: </span><span class="si">{</span><span class="n">soil</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Rrup (km)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># primera columna de cada fila muestra Y label</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitude (Mw)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Usar el subplot 6 para la leyenda</span>
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>  <span class="c1"># lo apagamos</span>
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Origen&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Rrup vs Mw separados por Soil Class&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8ee782f30abca43d496a762b43d9bf827a8b67faf67871ca7f1b8c30c505395e.png" src="_images/8ee782f30abca43d496a762b43d9bf827a8b67faf67871ca7f1b8c30c505395e.png" />
+</div>
+</div>
+<section id="logarithm-transformation-to-rrup-and-rhypo-variables">
+<h3>Logarithm transformation to Rrup and Rhypo variables.<a class="headerlink" href="#logarithm-transformation-to-rrup-and-rhypo-variables" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_total</span><span class="p">[</span><span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_total</span><span class="p">[</span><span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">])</span>  <span class="c1"># +1 para evitar log(0)</span>
+<span class="n">df_total</span><span class="p">[</span><span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_total</span><span class="p">[</span><span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">])</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  <span class="c1"># 2 filas x 2 columnas</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>  <span class="c1"># pasar a arreglo 1D para iterar fácil</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;origen&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">element</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">var</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Rhypo_OpenQuake&#39;</span><span class="p">,</span> <span class="s1">&#39;Rrup_OpenQuake&#39;</span><span class="p">]:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución de log(</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución de </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2"> por origen&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a62bb4ad3a4a84e0c3fb134de1835a32cc1a252665a2d9954206c2f22ace841f.png" src="_images/a62bb4ad3a4a84e0c3fb134de1835a32cc1a252665a2d9954206c2f22ace841f.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-nga-west2">EDA NGA West2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relaciones-con-la-variable-de-respuesta">Relaciones con la variable de respuesta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-colombia">EDA Colombia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-database">Full database</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithm-transformation-to-rrup-and-rhypo-variables">Logarithm transformation to Rrup and Rhypo variables.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eliasib Pájaro Retamoza
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
