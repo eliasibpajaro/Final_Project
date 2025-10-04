@@ -1,25 +1,7 @@
 # Prediction of Response Spectra Using Machine Learning Techniques. An AI-Driven Approach to Seismic Engineering
 
- Engineering, in general, seeks to provide solutions to everyday problems,
- risks, and needs. Within this broad scope, Seismic Engineering plays a crucial
- role in addressing natural hazards such as seismic events and earthquakes. Year
- after year, seismologists and civil engineers strive to anticipate the potential
- damages caused by such events, with one of the most critical challenges being
- the prediction of the seismic response spectra.
- Traditional Ground Motion Prediction Equations (GMPEs) have long served
- as the standard physics-based approach for estimating ground shaking intensity.
- However, these models face a fundamental limitation: they rely heavily on his
-torical records, which are scarce for rare, high-magnitude earthquakes. This
- data scarcity restricts their ability to provide reliable predictions in extrapola
-tive scenarios, precisely where accurate forecasting is most needed.
- Predicting response spectra with accuracy and physical consistency would
- open new possibilities for earthquake preparedness and risk mitigation. The
- central challenge, therefore, is not only the limited availability of seismic data
- but also the need for models capable of going beyond interpolation, achieving
- extrapolation guided by physical principles. In this context, Machine Learning
- emerges as a promising alternative. Yet, it is crucial to identify and develop
- ML models that not only provide accurate predictions but also retain physical
- meaning, ensuring that extrapolation aligns with established seismic theory.
+La ingeniería, en general, busca proporcionar soluciones a los problemas, riesgos y necesidades de la vida cotidiana. Dentro de este amplio ámbito, la ingeniería sísmica desempeña un papel crucial en la atención de amenazas naturales como los eventos sísmicos y los terremotos. Año tras año, sismólogos e ingenieros civiles se esfuerzan por anticipar los posibles daños ocasionados por estos fenómenos, siendo uno de los desafíos más críticos la predicción de los espectros de respuesta sísmica. Las Ecuaciones de Predicción de Movimiento del Suelo (GMPEs) han servido durante mucho tiempo como el enfoque estándar basado en la física para estimar la intensidad del sacudimiento del terreno. Sin embargo, estos modelos enfrentan una limitación fundamental: dependen en gran medida de los registros históricos, los cuales son escasos en el caso de terremotos poco frecuentes y de gran magnitud. Esta escasez de datos restringe su capacidad de ofrecer predicciones confiables en escenarios de extrapolación, precisamente donde la exactitud es más necesaria. Predecir espectros de respuesta con precisión y consistencia física abriría nuevas posibilidades para la preparación frente a terremotos y la mitigación del riesgo. El desafío central, por lo tanto, no solo es la limitada disponibilidad de datos sísmicos, sino también la necesidad de contar con modelos capaces de ir más allá de la interpolación y alcanzar la extrapolación guiada por principios físicos. En este contexto, el aprendizaje automático surge como una alternativa prometedora. No obstante, resulta crucial identificar y desarrollar modelos de ML que no solo brinden predicciones precisas, sino que también conserven un significado físico, asegurando que la extrapolación se alinee con la teoría sísmica establecida.
 
+(Versión en español)
 ```{tableofcontents}
 ```
