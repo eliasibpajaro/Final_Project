@@ -31,7 +31,8 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt      
-          pip install "jupyter-book==1.0.4"
+          pip install "jupyter-book<2.0.0"
+
 
 
       # (opcional) cache de notebooks ejecutados si activaste "execute_notebooks: cache"
