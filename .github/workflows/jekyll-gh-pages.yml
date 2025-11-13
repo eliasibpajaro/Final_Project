@@ -31,7 +31,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt      
-          pip install "jupyter-book<2.0.0"
 
 
 
@@ -43,7 +42,7 @@ jobs:
           key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
 
       - name: Build the book
-        run: jupyter-book build . --keep-going
+        run: jupyter-book build . 
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
