@@ -2,53 +2,54 @@ name: deploy-book
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ main ]   # <-- cámbialo si tu rama principal no es main
   workflow_dispatch:
 
-# Requerido por Pages v4
 permissions:
   contents: read
   pages: write
   id-token: write
-  actions: read
 
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  deploy-book:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-          cache: "pip"
-          cache-dependency-path: requirements.txt   # ajusta si tus deps están en otra ruta
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt      
-
-
-
-      # (opcional) cache de notebooks ejecutados si activaste "execute_notebooks: cache"
-      - name: Cache executed notebooks
-        uses: actions/cache@v4
-        with:
-          path: _build/.jupyter_cache
-          key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
+        run: |
+          python -m pip install --upgrade pip
+          # si tienes requirements.txt, déjalo primero:
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install jupyter-book  # JB 2.x
 
       - name: Build the book
-        run: jupyter-book build . 
+        run: jupyter-book build .
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload built book as artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: _build/html
+          path: ./_build/html   # carpeta html que genera jupyter-book
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
