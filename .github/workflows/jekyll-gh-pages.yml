@@ -40,7 +40,7 @@ jobs:
           key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
 
       - name: Build the book
-        run: jupyter-book build 
+        run: jupyter-book build . --keep-going
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
