@@ -30,7 +30,9 @@ jobs:
           cache-dependency-path: requirements.txt   # ajusta si tus deps están en otra ruta
 
       - name: Install dependencies
-        run: pip install -r requirements.txt        # ajusta la ruta si aplica
+        run: pip install -r requirements.txt      
+          pip install "jupyter-book==1.0.4"
+
 
       # (opcional) cache de notebooks ejecutados si activaste "execute_notebooks: cache"
       - name: Cache executed notebooks
