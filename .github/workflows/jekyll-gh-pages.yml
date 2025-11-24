@@ -34,8 +34,10 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install jupyter-book  # JB 2.x
 
+
       - name: Build the book
-        run: jupyter-book build .
+        run: jupyter-book build . --all
+
 
       - name: Upload built book as artifact
         uses: actions/upload-pages-artifact@v3
